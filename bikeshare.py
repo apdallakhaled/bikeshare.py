@@ -20,20 +20,20 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    city = input("Please enter a city name: ")
+    city = input("Please enter a city name: ").lower()
     while city not in CITY_DATA:
-        city = input("Oh sorry, Please choose from these three cities (chicago, new york city, washington): ")
+        city = input("Oh sorry, Please choose from these three cities (chicago, new york city, washington): ").lower()
 
     # TO DO: get user input for month (all, january, february, ... , june)
-    month = input("Please select a month or choose all for all months: ")
+    month = input("Please select a month or choose all for all months: ").lower()
     while month not in month_data:
-        month = input("Sorry, Please select a month between january and june or choose all for all months:" )
+        month = input("Sorry, Please select a month between january and june or choose all for all months:" ).lower()
 
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-    day = input("Please enter a day or choose all for all days: ")
+    day = input("Please enter a day or choose all for all days: ").lower()
     while day not in day_data:
-        day = input("Sorry, Please choose a day of the week or choose all for all months:" )
+        day = input("Sorry, Please choose a day of the week or choose all for all months:" ).lower()
     
 
 
@@ -160,18 +160,29 @@ def user_stats(df,city):
         # Display counts of gender
         print('The user gender is:')
         print(df['Gender'].value_counts())
-    # TO DO: Display earliest, most recent, and most common year of birth
-    earlist_date = df['Birth Year'].min()
-    newest_date = df['Birth Year'].max()
-    common_date = df['Birth Year'].mode()[0]
-    print('Earliest birth records are: {}\n'.format(earlist_date))
-    print('Newest birth records are: {}\n'.format(newest_date))
-    print('Most common birth data are: {}\n'.format(common_date))
+        # TO DO: Display earliest, most recent, and most common year of birth
+        earlist_date = df['Birth Year'].min()
+        newest_date = df['Birth Year'].max()
+        common_date = df['Birth Year'].mode()[0]
+        print('Earliest birth records are: {}\n'.format(earlist_date))
+        print('Newest birth records are: {}\n'.format(newest_date))
+        print('Most common birth data are: {}\n'.format(common_date))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
+def raw_data (df):
+    """shows the data after filtering.
+       Each press will add 5 rows.
+       """
+    print("Enter to display row data, no to skip.")
+    x = 0
+    while (input()!= 'no'):
+        x = x+5
+        print(df.head(x))
+        
+        
+        
 def main():
     while True:
         city, month, day = get_filters()
