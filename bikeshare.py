@@ -134,13 +134,13 @@ def trip_duration_stats(df):
     start_time = time.time()
 
     # TO DO: display total travel time
-    total_duration = str(df['Trip Duration'].sum())
-    print("The total travel time is: ", total_duration)
+    total_duration = df['Trip Duration'].sum()
+    print("The total travel time is: " + str(round(total_duration)))
 
 
     # TO DO: display mean travel time
-    mean_duration = str(df['Trip Duration'].mean())
-    print("The mean travel time is: ", mean_duration)
+    mean_duration = df['Trip Duration'].mean()
+    print("The mean travel time is: " + str(round (mean_duration)))
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -164,9 +164,9 @@ def user_stats(df,city):
         earlist_date = df['Birth Year'].min()
         newest_date = df['Birth Year'].max()
         common_date = df['Birth Year'].mode()[0]
-        print('Earliest birth records are: {}\n'.format(earlist_date))
-        print('Newest birth records are: {}\n'.format(newest_date))
-        print('Most common birth data are: {}\n'.format(common_date))
+        print('Earliest birth records are: {}\n'.format(int(earlist_date)))
+        print('Newest birth records are: {}\n'.format(int(newest_date)))
+        print('Most common birth data are: {}\n'.format(int(common_date)))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -179,7 +179,7 @@ def raw_data (df):
     x = 0
     while (input()!= 'no'):
         x = x+5
-        print(df.head(x))
+        print(df[x:x+5])
         
         
         
@@ -192,6 +192,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df,city)
+        raw_data (df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
